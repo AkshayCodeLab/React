@@ -1,13 +1,23 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-const heading = React.createElement("div", {id:"parent1"},
-    React.createElement("div", {id:"child1"}, [
-        React.createElement("h1", {}, "Hello React1"),
-        React.createElement("h2", {}, "Hello React2"),
-    ])
-);
+// Functional Component:
+const Title = () => <h1>This is the title of our webpage.</h1>;
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const HeadingComponent = () => {
+  const titles = [];
 
-root.render(heading);
+  for (let i = 0; i < 4; i++) {
+    titles.push(<Title key={i} />);
+  }
+
+  return (
+    <div>
+      {titles}
+      <h1>Hello React using functional component.</h1>
+    </div>
+  );
+};
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(<HeadingComponent />);
