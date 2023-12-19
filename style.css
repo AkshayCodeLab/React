@@ -44,3 +44,15 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-card{
+    background-color: #f0f0f0;
+    width: 200px;
+    height: 400px;
+    margin: 10px;
+}
