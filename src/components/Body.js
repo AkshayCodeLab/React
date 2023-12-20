@@ -1,9 +1,13 @@
 import RestaurantCard from './RestaurantCard';
 import { useEffect, useState } from 'react';
 import Shimmer from './Shimmer';
+
 const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
 
+  const [searchListRes, setSearchListRes] = useState('');
+
+  const [filteredRes, setFilteredRes] = useState([]);
   useEffect(() => {
     fetchData();
   }, []);
@@ -13,8 +17,11 @@ const Body = () => {
       'https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6529831&lng=77.20853939999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
     );
     const json = await data.json();
-    console.log(json);
     setListOfRes(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+    setFilteredRes(
       json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
@@ -30,13 +37,34 @@ const Body = () => {
           const changedList = listOfRes.filter(
             (item) => item.info.avgRating > 4.0
           );
-          setListOfRes(changedList);
+          setFilteredRes(changedList);
         }}
       >
         Top rated
       </button>
+      <input
+        className="search-bar"
+        placeholder="search restaurant"
+        value={searchListRes}
+        onChange={(e) => {
+          setSearchListRes(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          const filterList = listOfRes.filter((res) =>
+            res.info.name
+              .toLowerCase()
+              .includes(searchListRes.toLowerCase())
+          );
+
+          setFilteredRes(filterList);
+        }}
+      >
+        Submit
+      </button>
       <div className="res-container">
-        {listOfRes.map((item) => (
+        {filteredRes.map((item) => (
           <RestaurantCard key={item.info.id} resData={item} />
         ))}
       </div>
