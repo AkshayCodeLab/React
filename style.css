@@ -56,3 +56,9 @@
     height: 400px;
     margin: 10px;
 }
+
+.user-card{
+    height: 300px;
+    width: 200px;
+    border: 1px solid black ;
+}
