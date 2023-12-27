@@ -7,7 +7,6 @@ import {
   createBrowserRouter,
   Outlet,
   RouterProvider,
-  UNSAFE_LocationContext,
 } from 'react-router-dom';
 import Contact from './components/Contact';
 import Restaurant from './components/Restaurant';
