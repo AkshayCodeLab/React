@@ -19,11 +19,11 @@ const Body = () => {
     );
     const json = await data.json();
     setListOfRes(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilteredRes(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
@@ -37,39 +37,43 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <button
-        className="filter-btn"
-        onClick={() => {
-          const changedList = listOfRes.filter(
-            (item) => item.info.avgRating > 4.0
-          );
-          setFilteredRes(changedList);
-        }}
-      >
-        Top rated
-      </button>
-      <input
-        className="search-bar"
-        placeholder="search restaurant"
-        value={searchListRes}
-        onChange={(e) => {
-          setSearchListRes(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          const filterList = listOfRes.filter((res) =>
-            res.info.name
-              .toLowerCase()
-              .includes(searchListRes.toLowerCase())
-          );
+      <div className="search-box m-4 p-4">
+        <input
+          className="border border-black"
+          placeholder="search restaurant"
+          value={searchListRes}
+          onChange={(e) => {
+            setSearchListRes(e.target.value);
+          }}
+        />
+        <button
+          className="bg-green-100 m-4 px-4 py-1 rounded-md"
+          onClick={() => {
+            const filterList = listOfRes.filter((res) =>
+              res.info.name
+                .toLowerCase()
+                .includes(searchListRes.toLowerCase())
+            );
 
-          setFilteredRes(filterList);
-        }}
-      >
-        Submit
-      </button>
-      <div className="res-container">
+            setFilteredRes(filterList);
+          }}
+        >
+          Submit
+        </button>
+        <button
+          className="bg-gray-100 px-4 py-2"
+          onClick={() => {
+            const changedList = listOfRes.filter(
+              (item) => item.info.avgRating > 4.0
+            );
+            setFilteredRes(changedList);
+          }}
+        >
+          Top rated Restaurants
+        </button>
+      </div>
+
+      <div className="flex flex-wrap">
         {filteredRes.map((item) => (
           <Link key={item.info.id} to={'/restaurant/' + item.info.id}>
             <RestaurantCard resData={item} />
