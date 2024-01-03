@@ -1,44 +1,68 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { LOGO_URL } from '../utils/constants';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UserContext';
 const Header = () => {
   const [buttonVar, setButtonVar] = useState('Login');
-
   const onlineStatus = useOnlineStatus();
+
+  const { loggedInUser } = useContext(UserContext);
   return (
-    <div className="flex justify-between bg-pink-100 shadow-lg">
+    <div className="flex justify-between items-center bg-pink-100 dark:bg-gray-800 shadow-lg p-4">
+      {/* Logo Container */}
       <div className="logo-container">
-        <img className="w-48" src={LOGO_URL} />
+        <Link to="/">
+          <img
+            className="w-48 h-12 object-contain hover:opacity-75 transition duration-300"
+            src={LOGO_URL}
+            alt="Logo"
+          />
+        </Link>
       </div>
+      {/* Navigation and User Actions */}
       <div className="flex items-center">
-        <ul className="flex">
-          <li className="px-4">
-            {onlineStatus ? 'Online' : 'Offline'}
+        <ul className="flex space-x-4">
+          <li className="text-gray-600 dark:text-gray-400 hover:text-pink-500 transition duration-300 ease-in-out">
+            {onlineStatus ? (
+              <span role="img" aria-label="Online">
+                🌐
+              </span>
+            ) : (
+              <span role="img" aria-label="Offline">
+                🚫
+              </span>
+            )}
           </li>
-          <li className="px-4">
+          <li className="text-gray-600 dark:text-gray-400 hover:text-pink-500 transition duration-300 ease-in-out">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li className="px-4">
+          <li className="text-gray-600 dark:text-gray-400 hover:text-pink-500 transition duration-300 ease-in-out">
             <Link to="/">Home</Link>
           </li>
-          <li className="px-4">
+          <li className="text-gray-600 dark:text-gray-400 hover:text-pink-500 transition duration-300 ease-in-out">
             <Link to="/about">About Us</Link>
           </li>
-          <li className="px-4">
+          <li className="text-gray-600 dark:text-gray-400 hover:text-pink-500 transition duration-300 ease-in-out">
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li className="px-4">Cart</li>
+          <li className="text-gray-600 dark:text-gray-400 hover:text-pink-500 transition duration-300 ease-in-out">
+            Cart
+          </li>
           <li>
             <button
               onClick={() => {
-                buttonVar === 'Login'
-                  ? setButtonVar('Logout')
-                  : setButtonVar('Login');
+                setButtonVar((prevVar) =>
+                  prevVar === 'Login' ? 'Logout' : 'Login'
+                );
               }}
+              className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition duration-300 ease-in-out"
             >
               {buttonVar}
             </button>
+          </li>
+          <li className="text-gray-600 dark:text-gray-400 hover:text-pink-500 transition duration-300 ease-in-out font-bold">
+            {loggedInUser}
           </li>
         </ul>
       </div>

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import Body from './components/Body';
@@ -11,14 +11,28 @@ import {
 import Contact from './components/Contact';
 import Restaurant from './components/Restaurant';
 import Shimmer from './components/Shimmer';
-
+import UserContext from './utils/UserContext';
 const Grocery = lazy(() => import('./components/Grocery'));
 const About = lazy(() => import('./components/About'));
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+
+  // AUTHENTICATION USING API CALL
+  useEffect(() => {
+    // API CALL
+    const data = {
+      name: 'Akshay Gupta',
+    };
+    setUserName(data.name);
+  }, []);
   return (
     <div className="app">
-      <Header />
-      <Outlet />
+      <UserContext.Provider
+        value={{ loggedInUser: userName, setUserName }}
+      >
+        <Header />
+        <Outlet />
+      </UserContext.Provider>
     </div>
   );
 };
