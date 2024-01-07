@@ -5,6 +5,7 @@ const RestaurantCard = (props) => {
   const { cloudinaryImageId, name, cuisines, avgRating, costForTwo } =
     resData?.info;
 
+  let cuisineStr = cuisines.slice(0, 2).join(', ');
   return (
     <div className="w-[230px] h-auto m-4 p-4 bg-white dark:bg-gray-800 border border-gray-200 rounded-lg overflow-hidden transition-transform transform hover:scale-105">
       <div className="flex justify-center mb-4">
@@ -18,7 +19,7 @@ const RestaurantCard = (props) => {
         {name}
       </h3>
       <h4 className="text-gray-600 dark:text-gray-300 mb-2">
-        {cuisines.join(', ')}
+        {cuisineStr}
       </h4>
       <div className="flex items-center mb-2">
         <span className="text-yellow-500">{'\u2605'}</span>

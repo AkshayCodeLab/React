@@ -1,6 +1,13 @@
+import { useDispatch } from 'react-redux';
+import { addItem } from '../utils/cartSlice';
 const ItemList = ({ data }) => {
   const item = data.card.info;
   const { name, price, defaultPrice, imageId } = item;
+
+  const dispatch = useDispatch();
+  const addDispatchHandler = (val) => {
+    dispatch(addItem(val));
+  };
   return (
     <div className="flex justify-between items-center p-4 my-4 border-b-2 border-gray-300">
       <div className="text-left">
@@ -10,7 +17,10 @@ const ItemList = ({ data }) => {
         </span>
       </div>
       <div className="relative flex-shrink-0">
-        <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black text-white rounded-md p-1 text-xs">
+        <button
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black text-white rounded-md p-1 text-xs"
+          onClick={() => addDispatchHandler(data)}
+        >
           Add+
         </button>
         <img

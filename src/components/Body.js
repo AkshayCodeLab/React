@@ -23,11 +23,11 @@ const Body = () => {
     );
     const json = await data.json();
     setListOfRes(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilteredRes(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
@@ -75,7 +75,7 @@ const Body = () => {
           Top Rated
         </button>
         <input
-          className="border border-black m-2"
+          className="border border-black m-2 px-2"
           value={loggedInUser}
           onChange={(e) => {
             setUserName(e.target.value);
