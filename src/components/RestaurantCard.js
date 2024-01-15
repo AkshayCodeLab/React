@@ -2,13 +2,14 @@ import { CDN_URL } from '../utils/constants';
 
 const RestaurantCard = (props) => {
   const { resData } = props;
+
   const { cloudinaryImageId, name, cuisines, avgRating, costForTwo } =
     resData?.info;
 
   let cuisineStr = cuisines.slice(0, 2).join(', ');
   return (
     <div className="w-[230px] h-auto m-4 p-4 bg-white dark:bg-gray-800 border border-gray-200 rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-      <div className="flex justify-center mb-4">
+      <div data-testid="resCard" className="flex justify-center mb-4">
         <img
           className="w-48 h-48 object-cover rounded-xl"
           src={CDN_URL + cloudinaryImageId}

@@ -9,7 +9,10 @@ const ItemList = ({ data }) => {
     dispatch(addItem(val));
   };
   return (
-    <div className="flex justify-between items-center p-4 my-4 border-b-2 border-gray-300">
+    <div
+      data-testid="foodItems"
+      className="flex justify-between items-center p-4 my-4 border-b-2 border-gray-300"
+    >
       <div className="text-left">
         <h3 className="text-lg font-semibold">{name}</h3>
         <span className="text-gray-600">

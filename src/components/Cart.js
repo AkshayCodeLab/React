@@ -15,11 +15,12 @@ const Cart = () => {
       </h1>
       <div className="w-6/12 m-auto">
         <button
-          className="bg-black text-white p-2 m-2 rounded-lg"
+          className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out"
           onClick={clearHandler}
         >
           Clear Cart
         </button>
+
         {cart.length === 0 && (
           <h1 className="text-center">Cart is Empty</h1>
         )}

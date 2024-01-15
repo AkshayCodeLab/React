@@ -23,11 +23,11 @@ const Body = () => {
     );
     const json = await data.json();
     setListOfRes(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilteredRes(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
@@ -45,6 +45,7 @@ const Body = () => {
         <input
           className="border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-black dark:text-white px-3 py-2 rounded-md w-64 focus:outline-none focus:border-green-500"
           placeholder="Search restaurant"
+          data-testid="searchInput"
           value={searchListRes}
           onChange={(e) => {
             setSearchListRes(e.target.value);
